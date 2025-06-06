@@ -5,7 +5,7 @@
 Rcpp::List MNQTest0_Overall(
   Rcpp::List KList,
   arma::vec vcs,
-  Rcpp::IntegerVector index_interest,
+//  Rcpp::IntegerVector index_interest,
   arma::vec wgt) {
 
   int nVCs = vcs.size();
@@ -42,12 +42,16 @@ Rcpp::List MNQTest0_Overall(
   // Compute ratio and sigma_total
   double ratio = 0.0;
   arma::mat sigma_total = arma::zeros<arma::mat>(Nn, Nn);
-  for (int idx : index_interest) {
-    idx=idx-1;
-    // Rcpp::Rcout<<idx<<"\n";
-    ratio += vcs(idx) * wgt(idx);
-    sigma_total += QList[idx] * wgt(idx);
+  for (int i = 0; i < nVCs-1; ++i) {
+    ratio += vcs(i) * wgt(i);
+    sigma_total += QList[i] * wgt(i);
   }
+//  for (int idx : index_interest) {
+//    idx=idx-1;
+    // Rcpp::Rcout<<idx<<"\n";
+//    ratio += vcs(idx) * wgt(idx);
+//    sigma_total += QList[idx] * wgt(idx);
+//  }
 
   ratio /= (wgt(nVCs - 1) * vcs(nVCs - 1));
   sigma_total -= ratio * QList[nVCs - 1] * wgt[nVCs - 1];
