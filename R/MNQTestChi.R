@@ -8,7 +8,7 @@ SingleVarianceComp_fullRank<-function(phe,KernelList,TestingIndex=2)
 }
 
 
-MNQTest0_Chi <- function(y,KList, vcs ,TestingID) {
+MNQTest0_Chi <- function(KList, vcs ,TestingID) {
   tryCatch({
 
     # Overall test
