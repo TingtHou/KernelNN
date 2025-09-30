@@ -7,6 +7,7 @@ Authors@R: c(
            role = c("aut","cre"),
            comment = c(ORCID = "0000-0002-4433-5609"))
 )
+Maintainer: Tingting Hou <tingthou@lsu.edu>
 Description: In this package, we implement two kernel-based neural network (KNN) tests for complex association analysis of sequencing data. 
             The test is built on our previously developed KNN framework, which uses random effects to model the overall effects of high-dimensional genetic data and adopts kernel-based neural network structures to model complex genotype-phenotype relationships. 
             Based on KNN, a Wald-type test based on Iterative-MINQUE menthod and a mixture chi-square test based on MINQUE0 are introduced to evaluate the joint association of high-dimensional genetic data with a disease phenotype of interest, considering non-linear and non-additive effects (e.g., interaction effects).
