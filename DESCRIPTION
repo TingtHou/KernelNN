@@ -2,11 +2,7 @@ Package: KernelNN
 Type: Package
 Title: KernelNN: Association Test Methods Based on Kernel-Based Neural Networks
 Version: 0.1.0
-Authors@R: c(
-    person("Tingting", "Hou", email = "tingthou@lsu.edu",
-           role = c("aut","cre"),
-           comment = c(ORCID = "0000-0002-4433-5609"))
-)
+Author: Tingting Hou
 Maintainer: Tingting Hou <tingthou@lsu.edu>
 Description: In this package, we implement two kernel-based neural network (KNN) tests for complex association analysis of sequencing data. 
             The test is built on our previously developed KNN framework, which uses random effects to model the overall effects of high-dimensional genetic data and adopts kernel-based neural network structures to model complex genotype-phenotype relationships. 
