@@ -53,7 +53,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // MNQTest0_Overall
-Rcpp::List MNQTest0_Overall(Rcpp::List KList, arma::vec vcs, Rcpp::IntegerVector index_interest, arma::vec wgt);
+Rcpp::List MNQTest0_Overall(Rcpp::List KList, arma::vec vcs, arma::vec wgt);
 RcppExport SEXP _KernelNN_MNQTest0_Overall(SEXP KListSEXP, SEXP vcsSEXP, SEXP index_interestSEXP, SEXP wgtSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
