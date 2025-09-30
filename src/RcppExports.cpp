@@ -62,7 +62,7 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< arma::vec >::type vcs(vcsSEXP);
     Rcpp::traits::input_parameter< Rcpp::IntegerVector >::type index_interest(index_interestSEXP);
     Rcpp::traits::input_parameter< arma::vec >::type wgt(wgtSEXP);
-    rcpp_result_gen = Rcpp::wrap(MNQTest0_Overall(KList, vcs, index_interest, wgt));
+    rcpp_result_gen = Rcpp::wrap(MNQTest0_Overall(KList, vcs, wgt));
     return rcpp_result_gen;
 END_RCPP
 }
