@@ -12,9 +12,7 @@ MNQTest0_Chi <- function(KList, vcs ,TestingID) {
   tryCatch({
 
     # Overall test
-    Overall <- MNQTest0_Overall(KList = KList, vcs  = vcs,
-                                             index_interest = c(1:(length(KList) - 1)),
-                                             wgt = rep(1,length(KList)))
+    Overall <- MNQTest0_Overall(KList = KList, vcs  = vcs, wgt = rep(1,length(KList)))
     if ("err" %in% names(Overall)) {
       return(rep(NA, length(KList)))
     }
