@@ -13,8 +13,8 @@ IMINQUE <- function(KList, y, prior, epoch = 100L, threshold = 1e-4, echo = FALS
     .Call(`_KernelNN_IMINQUE`, KList, y, prior, epoch, threshold, echo)
 }
 
-MNQTest0_Overall <- function(KList, vcs, index_interest, wgt) {
-    .Call(`_KernelNN_MNQTest0_Overall`, KList, vcs, index_interest, wgt)
+MNQTest0_Overall <- function(KList, vcs, wgt) {
+    .Call(`_KernelNN_MNQTest0_Overall`, KList, vcs, wgt)
 }
 
 MNQTest0_Component <- function(KList, vcs, vcs_h0, index_interest, wgt) {
