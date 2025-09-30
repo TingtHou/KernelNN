@@ -25,7 +25,7 @@ KernelNN<-function(y,Data_Matrix,activeFun="linear", MINQUE="MINQUE0", Kernel="P
           TestingID=seq_len(length(HiddenKernel))
         }
       }
-      result<-MNQTest0_Chi(y,KList = HiddenKernel,vcs = VCs,TestingID)
+      result<-MNQTest0_Chi(KList = HiddenKernel,vcs = VCs,TestingID)
     }
   }else if(MINQUE=="IMINQUE")
   {
@@ -45,7 +45,7 @@ KernelNN<-function(y,Data_Matrix,activeFun="linear", MINQUE="MINQUE0", Kernel="P
           TestingID=seq_len(length(HiddenKernel))
         }
       }
-      result<-IMNQTest_Normal(y,KList = HiddenKernel,vcs = VCs,TestingID)
+      result<-IMNQTest_Normal(KList = HiddenKernel,vcs = VCs,index_interest=TestingID)
     }
   }
 
