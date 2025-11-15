@@ -47,5 +47,5 @@ Linear<-function(Kernels)
   nN<-nrow(Kernels[[1]])
   I <- diag(rep(1, nN));
   Kernels[[length(Kernels)+1]]<-I
-  return(list(KList=Kernels))
+  return(KList=Kernels)
 }
