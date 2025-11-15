@@ -61,7 +61,6 @@ getIdentity <- function(geno)
 getProduct <- function(geno, weights = 1)
 {
   n <- ncol(geno);
-  print(n)
   sqrtW <- sqrt(diag(weights, n));
   K <- (1/(n)) * tcrossprod(geno %*% sqrtW);
  # K <- (1/(n * sum(weights))) * tcrossprod(geno %*% sqrtW);
@@ -81,7 +80,6 @@ getPolynomial <- function(geno, weights =  1, constant = 1, deg =2)
 getGaussian <- function(geno, weights = 1, sigma = 1)
 {
   n <- ncol(geno);
-  print(n)
   wtGeno <- t(t(geno) * sqrt(weights));
   distMat <- as.matrix(dist(wtGeno, method = "euclidean", diag = T));
   K <- exp(-(1/(2 * n * (sigma) * sum(weights))) * distMat ^ 2);
@@ -95,4 +93,5 @@ getSigmoid<-function(geno,sigma=1)
   K<-tanh(K+sigma)
   return(K)
 }
+
 
