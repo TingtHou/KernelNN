@@ -23,7 +23,7 @@ Rcpp::List MINQUE0(Rcpp::List KList, arma::vec y) {
   // Solve C_mat * est_vcs = RightY
   arma::vec est_vcs = arma::solve(C_mat, RightY);
 
-  return Rcpp::List::create(Rcpp::Named("vcs") = est_vcs);
+  return Rcpp::List::create(Rcpp::Named("vcs") = est_vcs,Rcpp::Named("it") = 1);
 }
 // [[Rcpp::export]]
 Rcpp::List MINQUE(Rcpp::List KList, arma::vec y, arma::vec prior) {
@@ -78,7 +78,7 @@ Rcpp::List MINQUE(Rcpp::List KList, arma::vec y, arma::vec prior) {
   }
 
   arma::vec est_vcs = Cinv * RightY;
-  return Rcpp::List::create(Rcpp::Named("vcs") = est_vcs);
+  return Rcpp::List::create(Rcpp::Named("vcs") = est_vcs,Rcpp::Named("it") = 1);
 }
 // [[Rcpp::export]]
 Rcpp::List IMINQUE(Rcpp::List KList,

@@ -52,23 +52,23 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// MNQTest0_Overall
-Rcpp::List MNQTest0_Overall(Rcpp::List KList, arma::vec vcs, arma::vec wgt);
-RcppExport SEXP _KernelNN_MNQTest0_Overall(SEXP KListSEXP, SEXP vcsSEXP, SEXP index_interestSEXP, SEXP wgtSEXP) {
+// MNQTest0_Overall_arm
+Rcpp::List MNQTest0_Overall_arm(Rcpp::List KList, arma::vec vcs, arma::vec index_interest, arma::vec wgt);
+RcppExport SEXP _KernelNN_MNQTest0_Overall_arm(SEXP KListSEXP, SEXP vcsSEXP, SEXP index_interestSEXP, SEXP wgtSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< Rcpp::List >::type KList(KListSEXP);
     Rcpp::traits::input_parameter< arma::vec >::type vcs(vcsSEXP);
-    Rcpp::traits::input_parameter< Rcpp::IntegerVector >::type index_interest(index_interestSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type index_interest(index_interestSEXP);
     Rcpp::traits::input_parameter< arma::vec >::type wgt(wgtSEXP);
-    rcpp_result_gen = Rcpp::wrap(MNQTest0_Overall(KList, vcs, wgt));
+    rcpp_result_gen = Rcpp::wrap(MNQTest0_Overall_arm(KList, vcs, index_interest, wgt));
     return rcpp_result_gen;
 END_RCPP
 }
-// MNQTest0_Component
-Rcpp::List MNQTest0_Component(Rcpp::List KList, arma::vec vcs, arma::vec vcs_h0, Rcpp::IntegerVector index_interest, arma::vec wgt);
-RcppExport SEXP _KernelNN_MNQTest0_Component(SEXP KListSEXP, SEXP vcsSEXP, SEXP vcs_h0SEXP, SEXP index_interestSEXP, SEXP wgtSEXP) {
+// MNQTest0_Component_arm
+Rcpp::List MNQTest0_Component_arm(Rcpp::List KList, arma::vec vcs, arma::vec vcs_h0, Rcpp::IntegerVector index_interest, arma::vec wgt);
+RcppExport SEXP _KernelNN_MNQTest0_Component_arm(SEXP KListSEXP, SEXP vcsSEXP, SEXP vcs_h0SEXP, SEXP index_interestSEXP, SEXP wgtSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -77,20 +77,20 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< arma::vec >::type vcs_h0(vcs_h0SEXP);
     Rcpp::traits::input_parameter< Rcpp::IntegerVector >::type index_interest(index_interestSEXP);
     Rcpp::traits::input_parameter< arma::vec >::type wgt(wgtSEXP);
-    rcpp_result_gen = Rcpp::wrap(MNQTest0_Component(KList, vcs, vcs_h0, index_interest, wgt));
+    rcpp_result_gen = Rcpp::wrap(MNQTest0_Component_arm(KList, vcs, vcs_h0, index_interest, wgt));
     return rcpp_result_gen;
 END_RCPP
 }
-// IMNQTest_Normal
-Rcpp::List IMNQTest_Normal(Rcpp::List KList, arma::vec vcs, Rcpp::IntegerVector index_interest);
-RcppExport SEXP _KernelNN_IMNQTest_Normal(SEXP KListSEXP, SEXP vcsSEXP, SEXP index_interestSEXP) {
+// IMNQTest_Normal_arm
+Rcpp::List IMNQTest_Normal_arm(Rcpp::List KList, arma::vec vcs, Rcpp::IntegerVector index_interest);
+RcppExport SEXP _KernelNN_IMNQTest_Normal_arm(SEXP KListSEXP, SEXP vcsSEXP, SEXP index_interestSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< Rcpp::List >::type KList(KListSEXP);
     Rcpp::traits::input_parameter< arma::vec >::type vcs(vcsSEXP);
     Rcpp::traits::input_parameter< Rcpp::IntegerVector >::type index_interest(index_interestSEXP);
-    rcpp_result_gen = Rcpp::wrap(IMNQTest_Normal(KList, vcs, index_interest));
+    rcpp_result_gen = Rcpp::wrap(IMNQTest_Normal_arm(KList, vcs, index_interest));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -99,9 +99,9 @@ static const R_CallMethodDef CallEntries[] = {
     {"_KernelNN_MINQUE0", (DL_FUNC) &_KernelNN_MINQUE0, 2},
     {"_KernelNN_MINQUE", (DL_FUNC) &_KernelNN_MINQUE, 3},
     {"_KernelNN_IMINQUE", (DL_FUNC) &_KernelNN_IMINQUE, 6},
-    {"_KernelNN_MNQTest0_Overall", (DL_FUNC) &_KernelNN_MNQTest0_Overall, 4},
-    {"_KernelNN_MNQTest0_Component", (DL_FUNC) &_KernelNN_MNQTest0_Component, 5},
-    {"_KernelNN_IMNQTest_Normal", (DL_FUNC) &_KernelNN_IMNQTest_Normal, 3},
+    {"_KernelNN_MNQTest0_Overall_arm", (DL_FUNC) &_KernelNN_MNQTest0_Overall_arm, 4},
+    {"_KernelNN_MNQTest0_Component_arm", (DL_FUNC) &_KernelNN_MNQTest0_Component_arm, 5},
+    {"_KernelNN_IMNQTest_Normal_arm", (DL_FUNC) &_KernelNN_IMNQTest_Normal_arm, 3},
     {NULL, NULL, 0}
 };
 

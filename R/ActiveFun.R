@@ -1,5 +1,5 @@
 
-polynomial<-function(Kernels,order=2,prior=c(1,1,1))
+Polynomial<-function(Kernels,order=2,prior=c(1,1,1))
 {
 
   nN<-nrow(Kernels[[1]])

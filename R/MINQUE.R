@@ -1,4 +1,4 @@
-MINQUE0<-function(KList,y)
+MINQUE0_R<-function(KList,y)
 {
   VCs<-length(KList)
   C.mat<-matrix(NA,nrow=VCs,ncol=VCs)
