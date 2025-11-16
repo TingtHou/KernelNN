@@ -54,12 +54,12 @@ Conduct hypothesis testing on the overall genetic effect as well as selected ind
 #### a. If using `MINQUE0`:
 
 ```r
-Pvalue <- MNQTest0_Chi(y, KList = KList, vcs = vcs.result$vcs, TestingID)
+Pvalue <- MNQTest0_Chi(y, KList = KList, vcs = vcs.result$vcs, ComponentID)
 ```
-`TestingID`: Index or indices of components to test. If `TestingID` is NULL, only the overall effect will be tested.
+`ComponentID`: Index or indices of components to test. If `ComponentID` is NULL, only the overall effect will be tested.
 #### b. If using `IMINQUE`:
 ```r
-Pvalue<-IMNQTest_Normal(y, KList = KList, vcs = vcs.result$vcs, TestingID)
+Pvalue<-IMNQTest_Normal(y, KList = KList, vcs = vcs.result$vcs, ComponentID)
 ```
 
 
