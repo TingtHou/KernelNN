@@ -1,0 +1,128 @@
+---
+title: "Simulation Example: MINQUE0 vs IMINQUE"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Simulation Minque}
+  %\VignetteEngine{knitr::rmarkdown}
+---
+
+```{r}
+library(MASS)
+library(ggplot2)
+library(reshape2)
+library(KernelNN)   # your package
+n<-1000
+p<-500
+it<-100
+pvalue_mnq0<-matrix(NA, nrow = it, ncol = 4)
+est_mq0<-matrix(NA, nrow = it, ncol = 3)
+pvalue_imnq<-matrix(NA, nrow = it, ncol = 4)
+est_imq<-matrix(NA, nrow = it, ncol = 3)
+
+for (i in 1:it)
+{
+  G2<-matrix(rbinom(n*p,1,0.02), nrow = n, ncol = p)
+  G2<-scale(G2)
+  G1<-matrix(rnorm(n*p), nrow = n, ncol = p)
+  I<-diag(n)
+  # K2<-K1^2
+
+  y<-mvrnorm(n = 1, mu = rep(0,n), Sigma =2*I)
+  KernelList<-KernelGenerator(DataMatrix = list(G1,G2), kernelName = "product")
+
+  HiddenKernel <- Linear(KernelList)
+  vcs.result_minque0<-MINQUE0(KList = HiddenKernel,y = y)
+  mnq0_test<-MNQTest0_Chi(KList = HiddenKernel,vcs = vcs.result_minque0$vcs,ComponentID = c(1,2),y = y)
+  vcs.result_iminque<-IMINQUE(KList = HiddenKernel,y = y,prior = rep(1,length(HiddenKernel)),epoch=100,threshold = 1e-3)
+  # if ("err" %in% names(vcs.result))
+  # {
+  #   next
+  # }
+  mnq1_test<-IMNQTest_Normal(KList = HiddenKernel, vcs  = vcs.result_iminque$vcs,ComponentID=c(1,2))
+
+  # if ("err" %in% names(zTest))
+  # {
+  #   next;
+  # }
+  est_mq0[i,]<-vcs.result_minque0$vcs
+  est_imq[i,]<-vcs.result_iminque$vcs
+  pvalue_mnq0[i,1:(length(HiddenKernel)-1)]<-mnq0_test$components[1:(length(HiddenKernel)-1)]
+  pvalue_mnq0[i,3]<-mnq0_test$overall
+  pvalue_mnq0[i,4]<-1
+
+  pvalue_imnq[i,1:(length(HiddenKernel)-1)]<-mnq1_test$components[1:(length(HiddenKernel)-1)]
+  pvalue_imnq[i,3]<-mnq1_test$overall
+  pvalue_imnq[i,4]<-1
+}
+pvalue_mnq0<-as.data.frame(pvalue_mnq0)
+pvalue_imnq<-as.data.frame(pvalue_imnq)
+est_mq0<-as.data.frame(est_mq0)
+est_imq<-as.data.frame(est_imq)
+colnames(pvalue_mnq0)<-c("par1","par2","Overall","IT")
+colnames(pvalue_imnq)<-c("par1","par2","Overall","IT")
+colnames(est_mq0)<-c("par1","par2","Overall")
+colnames(est_imq)<-c("par1","par2","Overall")
+
+est_mq0$Method<-"MINQUE0"
+est_imq$Method<-"IMINQUE"
+est<-rbind(est_imq,est_mq0)
+
+
+
+
+xseq<-seq(0,1,by = 0.001)
+Power_mnq0<-matrix(nrow = length(xseq),ncol = 3)
+colnames(Power_mnq0)<-c("par1","par2","Overall")
+Power_imnq<-matrix(nrow = length(xseq),ncol = 3)
+colnames(Power_imnq)<-c("par1","par2","Overall")
+for(i in seq_along(xseq))
+{
+  Power_mnq0[i,]<-colMeans(pvalue_mnq0[,c("par1","par2","Overall")]<xseq[i])
+  Power_imnq[i,]<-colMeans(pvalue_imnq[,c("par1","par2","Overall")]<xseq[i])
+}
+Power_mnq0<-as.data.frame(Power_mnq0)
+Power_imnq<-as.data.frame(Power_imnq)
+Power_mnq0$xseq<-xseq
+Power_imnq$xseq<-xseq
+Power_mnq0$Method<-"MINQUE0"
+Power_imnq$Method<-"IMINQUE"
+Power<-rbind(Power_mnq0,Power_imnq)
+Power[which(Power$xseq==0.05),]
+
+
+Data <- melt(
+  Power,
+  id.vars = c("Method", "xseq"),        # keep these columns
+  measure.vars = c("par1", "par2", "Overall"),   # reshape these
+  variable.name = "Parameter",
+  value.name = "Value"
+)
+
+
+est_long <- melt(
+  est,
+  id.vars = "Method",
+  measure.vars = c("par1", "par2", "Overall"),
+  variable.name = "Parameter",
+  value.name = "Value"
+)
+
+
+TypeIError<-ggplot(Data)+aes(x=xseq, y=Value)+geom_point()+
+  facet_grid(Method ~ Parameter)+
+  geom_abline(aes(slope=1,intercept=0))+xlim(0,1)+ylim(0,1)+
+  ylab("Type I error")+xlab("Significance level")
+
+estPlot<-ggplot(est_long)+ aes(x = Parameter, y = Value)+
+  geom_boxplot() +  facet_grid(.~Method)+
+  theme_bw() +
+  labs(
+    title = "Boxplot of par1, par2, and Overall by Method",
+    x = "Parameter",
+    y = "Value"
+  )
+
+print(TypeIError)
+print(estPlot)
+
+```

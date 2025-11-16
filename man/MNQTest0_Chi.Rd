@@ -59,7 +59,7 @@ are currently set to 1.
 n <- 50
 set.seed(1)
 y  <- rnorm(n)
-K1 <- diag(n)
+K1 <- tcrossprod(matrix(rnorm(n * 5), n, 5))
 K2 <- tcrossprod(matrix(rnorm(n * 5), n, 5))
 vcs <- MINQUE0(list(K1, K2, diag(n)), y)$vcs
 MNQTest0_Chi(KList = list(K1, K2, diag(n)),

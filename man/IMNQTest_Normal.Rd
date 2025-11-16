@@ -50,7 +50,7 @@ The \code{components} element is then subset by \code{ComponentID}.
 \dontrun{
 n <- 50
 set.seed(1)
-K1 <- diag(n)
+K1 <- tcrossprod(matrix(rnorm(n * 5), n, 5))
 K2 <- tcrossprod(matrix(rnorm(n * 5), n, 5))
 vcs <- rep(1, 3)  # placeholder, typically from IMINQUE
 IMNQTest_Normal(KList = list(K1, K2, diag(n)),
