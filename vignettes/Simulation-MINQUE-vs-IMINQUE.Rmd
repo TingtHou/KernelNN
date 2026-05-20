@@ -10,7 +10,7 @@ vignette: >
 library(MASS)
 library(ggplot2)
 library(reshape2)
-library(KernelNN)   # your package
+library(KernelNN) 
 n<-1000
 p<-500
 it<-100
